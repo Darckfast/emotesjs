@@ -7,14 +7,20 @@ class EmoteJS {
     height = "1.65rem"
     format = "WEBP"
     allowedOrigins = "https://cdn.7tv.app"
+    instance
 
     constructor(opts) {
+        if (EmoteJS.instance) {
+            return EmoteJS.instance
+        }
+
         this.channelId = opts.channelId || this.channelId
         this.requireColon = opts.requireColon || this.requireColon
         this.height = opts.height || this.height
         this.format = opts.format || this.format
 
         this.isLoading = this.load()
+        EmoteJS.instance = this
     }
 
     async load() {
@@ -94,5 +100,5 @@ class EmoteJS {
 
 }
 
-module.exports = EmoteJS
+module.exports = { EmoteJS }
 
