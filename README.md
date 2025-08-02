@@ -1,8 +1,10 @@
+![banner](.github/images/banner.svg)
+
 # EmotesJS
 
-Simple, fast, responsive and dependency free 7TV inline emotes parse
+Fast, dependency free, and responsive 7TV inline emotes parse
 
-## Usages
+## Usage
 
 ```sh
 npm i emotesjs
@@ -17,4 +19,7 @@ let emotes = new EmotesJS({ channelId: 123456, requireColon: false, height: '1.6
 await emotes.isLoading
 
 let html = emotes.parse('this is pretty Pog')
+
+console.log(html) 
+// this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/>
 ```
