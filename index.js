@@ -47,11 +47,11 @@ class EmotesJS {
         let rawEmotes = []
 
         if (ch.status === "fulfilled") {
-            rawEmotes = rawEmotes.concat(ch.value.emote_set.emotes)
+            rawEmotes.push(...ch.value.emote_set.emotes)
         }
 
         if (global.status === "fulfilled") {
-            rawEmotes = rawEmotes.concat(global.value.emotes)
+            rawEmotes.push(...global.value.emotes)
         }
 
         for (let emote of rawEmotes) {
