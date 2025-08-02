@@ -1,4 +1,4 @@
-class EmoteJS {
+class EmotesJS {
     cachedEmotes = new Map()
     isReady = false
     isLoading = Promise.resolve()
@@ -100,5 +100,5 @@ class EmoteJS {
 
 }
 
-module.exports = { EmoteJS }
+module.exports.EmotesJS = EmotesJS
 
