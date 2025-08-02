@@ -1,5 +1,5 @@
-<svg viewBox="0 0 1200 2000" xmlns="http://www.w3.org/2000/svg" style="display: block; vertical-align: middle;">
-    <foreignObject x="0" y="0" width="1200" height="2000">
+<svg viewBox="0 0 1100 700" xmlns="http://www.w3.org/2000/svg" style="display: block; vertical-align: middle;">
+    <foreignObject x="0" y="0" width="1100" height="700">
         <div
             class="relative flex items-center justify-evenly bg-gradient-to-r from-blue-600 to-violet-600 p-8 text-center text-xl font-bold text-white"
             style="position: relative; display: flex; align-items: center; justify-content: space-evenly; background-image: linear-gradient(to right, var(--tw-gradient-stops)); --tw-gradient-from: #2563eb; --tw-gradient-to: #7c3aed; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); padding: 2rem; text-align: center; font-size: 1.25rem; line-height: 1.75rem; font-weight: 700; --tw-text-opacity: 1; color: rgb(255 255 255 / var(--tw-text-opacity));">
@@ -170,3 +170,4 @@
         </div>
     </foreignObject>
 </svg>
+
