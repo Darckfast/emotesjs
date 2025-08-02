@@ -46,6 +46,7 @@ describe('EmotesJS: init', () => {
         expect(e).toBe(emotes)
         expect(e.channelId).toBe(38746172)
     })
+
     test('should load if not loaded on new instance', () => {
         EmotesJS.instance = undefined
         let e = new EmotesJS()

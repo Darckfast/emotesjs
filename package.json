@@ -23,7 +23,7 @@
         "emotes"
     ],
     "scripts": {
-        "test": "vitest"
+        "test": "vitest run"
     },
     "devDependencies": {
         "vitest": "^3.2.4"
