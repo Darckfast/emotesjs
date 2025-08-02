@@ -1,4 +1,4 @@
-![banner](.github/images/banner.svg)
+![banner](.github/images/banner.png)
 
 # EmotesJS
 
