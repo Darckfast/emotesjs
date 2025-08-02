@@ -15,7 +15,7 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "git://github.com/darckfast/emotesjs.git"
+        "url": "git+https://github.com/darckfast/emotesjs.git"
     },
     "keywords": [
         "twitch",
