@@ -8,25 +8,25 @@ on:
     types: [created]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 22
-  #         cache: 'pnpm'
-  #     
-  #     - uses: pnpm/action-setup@v4
-  #       name: Install pnpm
-  #       with:
-  #         version: 10
-  #     - run: pnpm i
-  #     # - run: pnpm test
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+      
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+      - run: pnpm i
+      - run: pnpm test
 
   publish-npm:
-    # needs: build
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -37,6 +37,12 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
+          cache: 'pnpm'
+      
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
 
       - run: npm publish --access public
         env:

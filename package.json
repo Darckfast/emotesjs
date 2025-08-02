@@ -22,5 +22,10 @@
         "7tv",
         "emotes"
     ],
-    "scripts": {}
+    "scripts": {
+        "test": "vitest"
+    },
+    "devDependencies": {
+        "vitest": "^3.2.4"
+    }
 }
