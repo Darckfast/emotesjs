@@ -15,8 +15,8 @@ class EmotesJS {
         }
 
         if (opts) {
-            this.channelId = opts.channelId || this.channelId
-            this.requireColon = opts.requireColon || this.requireColon
+            this.channelId = opts.channelId
+            this.requireColon = opts.requireColon
             this.height = opts.height || this.height
             this.format = opts.format || this.format
         }
