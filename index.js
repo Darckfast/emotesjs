@@ -7,20 +7,22 @@ class EmotesJS {
     height = "1.65rem"
     format = "WEBP"
     allowedOrigins = "https://cdn.7tv.app"
-    instance
+    static instance
 
     constructor(opts) {
-        if (EmoteJS.instance) {
-            return EmoteJS.instance
+        if (EmotesJS.instance) {
+            return EmotesJS.instance
         }
 
-        this.channelId = opts.channelId || this.channelId
-        this.requireColon = opts.requireColon || this.requireColon
-        this.height = opts.height || this.height
-        this.format = opts.format || this.format
+        if (opts) {
+            this.channelId = opts.channelId || this.channelId
+            this.requireColon = opts.requireColon || this.requireColon
+            this.height = opts.height || this.height
+            this.format = opts.format || this.format
+        }
 
         this.isLoading = this.load()
-        EmoteJS.instance = this
+        EmotesJS.instance = this
     }
 
     async load() {
@@ -70,8 +72,8 @@ class EmotesJS {
         this.isReady = true
     }
 
-    parse(text) {
-        if (!text || !this.isReady) {
+    static parse(text) {
+        if (!text || !EmotesJS.isReady) {
             return text
         }
         let words = text.split(' ')
@@ -80,12 +82,12 @@ class EmotesJS {
         for (let i = 0; i < words.length; i++) {
             let word = words[i]
 
-            if (this.requireColon && !word.startsWith(":")) {
+            if (EmotesJS.requireColon && !word.startsWith(":")) {
                 continue
             }
 
             let wordKey = word.replace(':', '')
-            let emote = this.cachedEmotes.get(wordKey)
+            let emote = EmotesJS.cachedEmotes.get(wordKey)
 
             if (emote) {
                 fullText += emote + ' '
