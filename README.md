@@ -6,10 +6,12 @@ Fast, dependency free, and responsive 7TV inline emotes parse
 
 ## Usage
 
+### Installation
 ```sh
 npm i emotesjs
 ```
 
+### Parsing
 ```js
 import { EmotesJS } from 'emotesjs'
 
