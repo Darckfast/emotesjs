@@ -58,7 +58,7 @@ class EmotesJS {
             let name = emote.data.name
             let url = `https:${emote.data.host.url}`
 
-            if (!this.allowedOrigins.includes(url)) {
+            if (!url.includes(this.allowedOrigins)) {
                 continue
             }
 
@@ -74,8 +74,15 @@ class EmotesJS {
 
     parse(text) {
         if (!text || !this.isReady) {
+            console.log('emotes not ready')
             return text
         }
+
+        if (this.isReady && this.cachedEmotes.size === 0) {
+            console.log('no emotes loaded')
+            return text
+        }
+
         let words = text.split(' ')
 
         let fullText = ''
