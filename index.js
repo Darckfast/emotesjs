@@ -72,8 +72,8 @@ class EmotesJS {
         this.isReady = true
     }
 
-    static parse(text) {
-        if (!text || !EmotesJS.isReady) {
+    parse(text) {
+        if (!text || !this.isReady) {
             return text
         }
         let words = text.split(' ')
@@ -82,12 +82,12 @@ class EmotesJS {
         for (let i = 0; i < words.length; i++) {
             let word = words[i]
 
-            if (EmotesJS.requireColon && !word.startsWith(":")) {
+            if (this.requireColon && !word.startsWith(":")) {
                 continue
             }
 
             let wordKey = word.replace(':', '')
-            let emote = EmotesJS.cachedEmotes.get(wordKey)
+            let emote = this.cachedEmotes.get(wordKey)
 
             if (emote) {
                 fullText += emote + ' '
