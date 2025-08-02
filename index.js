@@ -89,16 +89,14 @@ class EmotesJS {
         for (let i = 0; i < words.length; i++) {
             let word = words[i]
 
-            if (this.requireColon && !word.startsWith(":")) {
-                continue
-            }
+            if (this.requireColon && word.startsWith(":")) {
+                let wordKey = word.replace(':', '')
+                let emote = this.cachedEmotes.get(wordKey)
 
-            let wordKey = word.replace(':', '')
-            let emote = this.cachedEmotes.get(wordKey)
-
-            if (emote) {
-                fullText += emote + ' '
-                continue;
+                if (emote) {
+                    fullText += emote + ' '
+                    continue;
+                }
             }
 
             fullText += word + " "
