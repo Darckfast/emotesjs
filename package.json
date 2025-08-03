@@ -1,6 +1,6 @@
 {
     "name": "emotesjs",
-    "description": "",
+    "description": "Fast, dependency free, and responsive 7TV inline emotes parse",
     "version": "0.0.20",
     "license": "MIT",
     "author": {
@@ -20,7 +20,8 @@
     "keywords": [
         "twitch",
         "7tv",
-        "emotes"
+        "emotes",
+        "responsive"
     ],
     "scripts": {
         "test": "vitest run",
