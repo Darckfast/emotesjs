@@ -15,7 +15,7 @@ pnpm i emotesjs
 ```js
 import { EmotesJS } from 'emotesjs'
 
-let emotes = new EmotesJS({ channelId: 123456, requireColon: false, height: '1.65rem', format: 'WEBP' })
+let emotes = new EmotesJS({ channelId: 123456, colon: false, height: '1.65rem', format: 'WEBP' })
 
 // optional - once fetched, the emotes will be cached in memory
 await emotes.isLoading
@@ -31,7 +31,7 @@ console.log(html)
 ```js
 new EmotesJS({ 
     channelId: 123456, // twitch channel id (or user id) to load the emotes
-    requireColon: false, // if true, the string must start with : e.g. :Pog
+    colon: false, // if true, the string must start with : e.g. :Pog
     height: '1.65rem', // the element <img> height
     format: 'WEBP' // or AVIF
 })
