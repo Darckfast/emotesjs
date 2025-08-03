@@ -78,12 +78,16 @@ class EmotesJS {
     }
 
     parse(text) {
-        if (!text || !this.#isReady) {
-            console.log("emotes not ready")
+        if (!text) {
+            console.log("no text to parse emotes")
+            return text
+        }
+        if (!this.#isReady) {
+            console.log("emotes are not ready")
             return text
         }
 
-        if (this.#isReady && this.#cachedEmotes.size === 0) {
+        if (this.#cachedEmotes.size === 0) {
             console.log("no emotes loaded")
             return text
         }

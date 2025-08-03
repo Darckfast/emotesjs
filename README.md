@@ -10,6 +10,10 @@ Fast, dependency free, and responsive 7TV inline emotes parse
 ```sh
 pnpm i emotesjs
 ```
+or using a CDN
+```html
+<script src="https://cdn.jsdelivr.net/npm/emotesjs@0.0.20/index.min.js"></script>
+```
 
 ### Parsing
 ```js
