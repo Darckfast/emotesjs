@@ -1,12 +1,12 @@
 class EmotesJS {
     #cachedEmotes = new Map()
     #isReady = false
-    #requireColon = true
+    #colon = true
     #height = "1.65rem"
     #format = "WEBP"
     #allowedOrigins = "https://cdn.7tv.app"
 
-    loadedEmotes = 0
+    total = 0
     channelId = 0
     isLoading = Promise.resolve()
     static instance
@@ -18,8 +18,8 @@ class EmotesJS {
 
         if (opts) {
             this.channelId = opts.channelId
-            this.#requireColon = opts.requireColon
-            this.#requireColon ||= false
+            this.#colon = opts.colon
+            this.#colon ||= false
             this.#height = opts.height || this.#height
             this.#format = opts.format || this.#format
         }
@@ -72,7 +72,7 @@ class EmotesJS {
             this.#cachedEmotes.set(name, elementString)
         }
 
-        this.loadedEmotes = this.#cachedEmotes.size
+        this.total = this.#cachedEmotes.size
 
         this.#isReady = true
     }
@@ -95,7 +95,7 @@ class EmotesJS {
             let word = words[i]
 
 
-            if (this.#requireColon && !word.startsWith(":")) {
+            if (this.#colon && !word.startsWith(":")) {
                 fullText += word + " "
                 continue
             }

@@ -8,7 +8,7 @@ Fast, dependency free, and responsive 7TV inline emotes parse
 
 ### Installation
 ```sh
-npm i emotesjs
+pnpm i emotesjs
 ```
 
 ### Parsing

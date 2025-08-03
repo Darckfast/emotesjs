@@ -5,12 +5,12 @@ describe('EmotesJS: parse', () => {
     let emotes
 
     beforeAll(async () => {
-        emotes = new EmotesJS({ channelId: 38746172, requireColon: true })
+        emotes = new EmotesJS({ channelId: 38746172, colon: true })
         await emotes.isLoading
     })
 
     test('should load emotes in memory', () => {
-        expect(emotes.loadedEmotes).toBeGreaterThan(1)
+        expect(emotes.total).toBeGreaterThan(1)
     })
 
     test('should not parse Pog', () => {
