@@ -1,10 +1,10 @@
 class EmotesJS {
     #cachedEmotes = new Map()
-    #isReady = false
     #colon = true
     #height = "1.65rem"
     #format = "WEBP"
     #allowedOrigins = "https://cdn.7tv.app"
+    #isReady = false
 
     total = 0
     channelId = 0
@@ -22,10 +22,20 @@ class EmotesJS {
             this.#colon ||= false
             this.#height = opts.height || this.#height
             this.#format = opts.format || this.#format
+
+            if (opts.cache && typeof opts.cache === "string") {
+                this.#cachedEmotes = new Map(Object.entries(JSON.parse(opts.cache)))
+                this.total = this.#cachedEmotes.size
+                this.#isReady = true
+            }
         }
 
         this.isLoading = this.load()
         EmotesJS.instance = this
+    }
+
+    cache() {
+        return JSON.stringify(Object.fromEntries(this.#cachedEmotes.entries()));
     }
 
     async load() {
@@ -57,6 +67,10 @@ class EmotesJS {
             rawEmotes.push(...global.value.emotes)
         }
 
+        if (this.#cachedEmotes.size !== 0) {
+            this.#cachedEmotes.clear()
+        }
+
         for (let emote of rawEmotes) {
             let name = emote.data.name
             let url = `https:${emote.data.host.url}`
@@ -73,7 +87,6 @@ class EmotesJS {
         }
 
         this.total = this.#cachedEmotes.size
-
         this.#isReady = true
     }
 
