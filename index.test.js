@@ -28,9 +28,9 @@ describe('EmotesJS: parse', () => {
         expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
     })
 
-    test('should parse Pog, if `requireColon` is disabled', async () => {
+    test('should parse Pog, if `colon` is disabled', async () => {
         EmotesJS.instance = undefined
-        emotes = new EmotesJS({ channelId: 38746172, requireColon: false })
+        emotes = new EmotesJS({ channelId: 38746172, colon: false })
         await emotes.isLoading
         let result = emotes.parse('this is pretty Pog and fast')
         expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
@@ -54,5 +54,20 @@ describe('EmotesJS: init', () => {
 
         expect(e).not.toBe(emotes)
         expect(emotes.channelId).toBe(38746172)
+    })
+
+    test('should usage cache', async () => {
+        EmotesJS.instance = undefined
+        let emotes = new EmotesJS({ channelId: 38746172 })
+        await emotes.isLoading
+
+        let cache = emotes.cache()
+
+        EmotesJS.instance = undefined
+
+        emotes = new EmotesJS({ channelId: 38746172, cache })
+        expect(emotes.total).toBeGreaterThan(0)
+        let result = emotes.parse('this is pretty Pog and fast')
+        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
     })
 })
