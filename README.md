@@ -14,7 +14,7 @@ pnpm i emotesjs
 ```
 or using a CDN
 ```html
-<script src="https://cdn.jsdelivr.net/npm/emotesjs@0.0.21/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emotesjs@0.0.22/index.min.js"></script>
 ```
 
 ### Parsing
