@@ -35,6 +35,14 @@ describe('EmotesJS: parse', () => {
         let result = emotes.parse('this is pretty Pog and fast')
         expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
     })
+
+    test('should parse Pog, using pixel density descriptor', async () => {
+        EmotesJS.instance = undefined
+        emotes = new EmotesJS({ channelId: 38746172, colon: false, usePixelDensity: true })
+        await emotes.isLoading
+        let result = emotes.parse('this is pretty Pog and fast')
+        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 4x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 3x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 2x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 1x, " alt="Pog" style="height:1.65rem"/> and fast`)
+    })
 })
 
 describe('EmotesJS: init', () => {
