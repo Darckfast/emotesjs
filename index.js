@@ -5,6 +5,7 @@ class EmotesJS {
     #format = "WEBP"
     #allowedOrigins = "https://cdn.7tv.app"
     #isReady = false
+    #usePixelDensity = false
 
     total = 0
     channelId = 0
@@ -22,6 +23,8 @@ class EmotesJS {
             this.#colon ||= false
             this.#height = opts.height || this.#height
             this.#format = opts.format || this.#format
+            this.#usePixelDensity = opts.usePixelDensity
+            this.#usePixelDensity ||= false
 
             if (opts.cache && typeof opts.cache === "string") {
                 this.#cachedEmotes = new Map(Object.entries(JSON.parse(opts.cache)))
@@ -80,7 +83,14 @@ class EmotesJS {
             }
 
             let files = emote.data.host.files.filter(x => x.format === this.#format)
-            let srcset = files.reduce((acc, curr) => `${url}/${curr.name} ${curr.width}w, ${acc}`, "")
+            let srcset = files.reduce((acc, curr) => {
+                let w = `${curr.width}w`
+
+                if (this.#usePixelDensity) {
+                    [w] = curr.name.split('.')
+                }
+                return `${url}/${curr.name} ${w}, ${acc}`
+            }, "")
             let elementString = `<img srcset="${srcset}" alt="${name}" style="height:${this.#height}"/>`
 
             this.#cachedEmotes.set(name, elementString)
