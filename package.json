@@ -25,10 +25,9 @@
     ],
     "scripts": {
         "test": "vitest run",
-        "prepublishOnly": "terser index.js -o index.js"
+        "prepublishOnly": "pnpx terser index.js -o index.js"
     },
     "devDependencies": {
-        "terser": "^5.43.1",
         "vitest": "^3.2.4"
     }
 }
