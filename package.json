@@ -1,7 +1,7 @@
 {
     "name": "emotesjs",
     "description": "Fast, dependency free, and responsive 7TV inline emotes parse",
-    "version": "0.0.22",
+    "version": "0.0.23",
     "license": "MIT",
     "author": {
         "name": "darckfast"
