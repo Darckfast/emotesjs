@@ -33,7 +33,7 @@ class EmotesJS {
             }
         }
 
-        this.isLoading = this.load()
+        this.isLoading = this.load(opts.only)
         EmotesJS.instance = this
     }
 
@@ -41,7 +41,7 @@ class EmotesJS {
         return JSON.stringify(Object.fromEntries(this.#cachedEmotes.entries()));
     }
 
-    async load() {
+    async load(only = []) {
         let globalProm = fetch("https://7tv.io/v3/emote-sets/global").then(async r => {
             if (r.ok) {
                 return r.json()
@@ -79,6 +79,10 @@ class EmotesJS {
             let url = `https:${emote.data.host.url}`
 
             if (!url.includes(this.#allowedOrigins)) {
+                continue
+            }
+
+            if (only.length > 0 && !only.includes(name)) {
                 continue
             }
 
@@ -143,5 +147,4 @@ class EmotesJS {
 
 }
 
-module.exports.EmotesJS = EmotesJS
-
+module.exports = { EmotesJS }
