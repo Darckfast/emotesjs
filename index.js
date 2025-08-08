@@ -42,7 +42,7 @@ class EmotesJS {
     }
 
     async load(only = []) {
-        let globalProm = fetch("https://7tv.io/v3/emote-sets/global").then(async r => {
+        let globalProm = fetch("https://7tv.io/v3/emote-sets/global").then(r => {
             if (r.ok) {
                 return r.json()
             }
@@ -50,7 +50,7 @@ class EmotesJS {
             throw new Error("fetch unsuccessful")
         })
 
-        let chProm = fetch("https://7tv.io/v3/users/twitch/" + this.channelId).then(async r => {
+        let chProm = fetch("https://7tv.io/v3/users/twitch/" + this.channelId).then(r => {
             if (r.ok) {
                 return r.json()
             }
