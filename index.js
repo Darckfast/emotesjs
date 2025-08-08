@@ -33,7 +33,7 @@ class EmotesJS {
             }
         }
 
-        this.isLoading = this.load(opts.only)
+        this.isLoading = this.load(opts?.only)
         EmotesJS.instance = this
     }
 
