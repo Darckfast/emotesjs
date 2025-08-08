@@ -17,7 +17,9 @@ class EmotesJS {
             return EmotesJS.instance
         }
 
+        let only
         if (opts) {
+            only = opts.only
             this.channelId = opts.channelId
             this.#colon = opts.colon
             this.#colon ||= false
@@ -33,7 +35,7 @@ class EmotesJS {
             }
         }
 
-        this.isLoading = this.load(opts?.only)
+        this.isLoading = this.load(only)
         EmotesJS.instance = this
     }
 

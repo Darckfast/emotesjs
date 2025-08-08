@@ -78,4 +78,12 @@ describe('EmotesJS: init', () => {
         let result = emotes.parse('this is pretty Pog and fast')
         expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
     })
+
+    test('should load only the EZ emote', async () => {
+        EmotesJS.instance = undefined
+        let emotes = new EmotesJS({ channelId: 38746172, only: ['EZ'] })
+
+        await emotes.isLoading
+        expect(emotes.total).toBe(1)
+    })
 })
