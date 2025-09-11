@@ -19,6 +19,9 @@ class EmotesJS {
     channelId = 0;
     /** @default Promise<void> */
     isLoading = Promise.resolve();
+    /** @default "" */
+    proxy = ""
+
     /**
      * @static
      */
@@ -43,6 +46,8 @@ class EmotesJS {
                 this.total = this.#cachedEmotes.size;
                 this.#isReady = true;
             }
+
+            this.proxy = opts.proxy
         }
         this.isLoading = this.load(only);
         EmotesJS.instance = this;
@@ -94,6 +99,9 @@ class EmotesJS {
             let url = `https:${emote.data.host.url}`;
             if (!url.includes(this.#allowedOrigins)) {
                 continue;
+            }
+            if (this.proxy) {
+                url = this.proxy
             }
             if (only.length > 0 && !only.includes(name)) {
                 continue;
