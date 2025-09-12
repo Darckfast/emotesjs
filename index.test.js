@@ -86,4 +86,13 @@ describe('EmotesJS: init', () => {
         await emotes.isLoading
         expect(emotes.total).toBe(1)
     })
+
+    test('should change src with proxy', async () => {
+        EmotesJS.instance = undefined
+        let emotes = new EmotesJS({ channelId: 38746172, only: ['EZ'], proxy: "http://localhost:80" })
+
+        await emotes.isLoading
+        let result = emotes.parse('EZ')
+        expect(result).toBe(`<img srcset="http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/4x.webp 128w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/3x.webp 96w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/2x.webp 64w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/1x.webp 32w, " alt="EZ" style="height:1.65rem"/>`)
+    })
 })

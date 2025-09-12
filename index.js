@@ -101,7 +101,7 @@ class EmotesJS {
                 continue;
             }
             if (this.proxy) {
-                url = this.proxy
+                url = url.replace(this.#allowedOrigins, this.proxy)
             }
             if (only.length > 0 && !only.includes(name)) {
                 continue;
