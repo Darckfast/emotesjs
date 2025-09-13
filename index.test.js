@@ -20,12 +20,12 @@ describe('EmotesJS: parse', () => {
 
     test('should parse :Pog:', () => {
         let result = emotes.parse('this is pretty :Pog: and fast')
-        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
+        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem" crossorigin/> and fast`)
     })
 
     test('should parse :Pog', () => {
         let result = emotes.parse('this is pretty :Pog and fast')
-        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
+        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem" crossorigin/> and fast`)
     })
 
     test('should parse Pog, if `colon` is disabled', async () => {
@@ -33,7 +33,7 @@ describe('EmotesJS: parse', () => {
         emotes = new EmotesJS({ channelId: 38746172, colon: false })
         await emotes.isLoading
         let result = emotes.parse('this is pretty Pog and fast')
-        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
+        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem" crossorigin/> and fast`)
     })
 
     test('should parse Pog, using pixel density descriptor', async () => {
@@ -41,7 +41,7 @@ describe('EmotesJS: parse', () => {
         emotes = new EmotesJS({ channelId: 38746172, colon: false, usePixelDensity: true })
         await emotes.isLoading
         let result = emotes.parse('this is pretty Pog and fast')
-        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 4x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 3x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 2x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 1x, " alt="Pog" style="height:1.65rem"/> and fast`)
+        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 4x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 3x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 2x, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 1x, " alt="Pog" style="height:1.65rem" crossorigin/> and fast`)
     })
 })
 
@@ -76,7 +76,7 @@ describe('EmotesJS: init', () => {
         emotes = new EmotesJS({ channelId: 38746172, cache })
         expect(emotes.total).toBeGreaterThan(0)
         let result = emotes.parse('this is pretty Pog and fast')
-        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem"/> and fast`)
+        expect(result).toBe(`this is pretty <img srcset="https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/4x.webp 128w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/3x.webp 96w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/2x.webp 64w, https://cdn.7tv.app/emote/01EZTCN91800012PTN006Q50PR/1x.webp 32w, " alt="Pog" style="height:1.65rem" crossorigin/> and fast`)
     })
 
     test('should load only the EZ emote', async () => {
@@ -93,6 +93,6 @@ describe('EmotesJS: init', () => {
 
         await emotes.isLoading
         let result = emotes.parse('EZ')
-        expect(result).toBe(`<img srcset="http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/4x.webp 128w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/3x.webp 96w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/2x.webp 64w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/1x.webp 32w, " alt="EZ" style="height:1.65rem"/>`)
+        expect(result).toBe(`<img srcset="http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/4x.webp 128w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/3x.webp 96w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/2x.webp 64w, http://localhost:80/emote/01GB4CK01800090V9B3D8CGEEX/1x.webp 32w, " alt="EZ" style="height:1.65rem" crossorigin/>`)
     })
 })
