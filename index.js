@@ -114,7 +114,7 @@ class EmotesJS {
                 }
                 return `${url}/${curr.name} ${w}, ${acc}`;
             }, "");
-            let elementString = `<img srcset="${srcset}" alt="${name}" style="height:${this.#height}"/>`;
+            let elementString = `<img srcset="${srcset}" alt="${name}" style="height:${this.#height}" crossorigin/>`;
             this.#cachedEmotes.set(name, elementString);
         }
         this.total = this.#cachedEmotes.size;
