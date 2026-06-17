@@ -1,35 +1,144 @@
-class EmotesJS {
-    /** @default Map<string, string> */
-    #cachedEmotes = new Map();
-    /** @default true */
+export interface SevenTVChannelEmotes {
+    id: string
+    platform: string
+    username: string
+    display_name: string
+    linked_at: number
+    emote_capacity: number
+    emote_set_id: string
+    emote_set: EmoteSet
+    user: User
+}
+
+export interface EmoteSet {
+    id: string
+    name: string
+    flags: number
+    tags: any[]
+    immutable: boolean
+    privileged: boolean
+    emotes: Emote[]
+    emote_count: number
+    capacity: number
+    owner: any
+}
+
+export interface Emote {
+    id: string
+    name: string
+    flags: number
+    timestamp: number
+    actor_id?: string
+    data: Data
+    origin_id: any
+}
+
+export interface Data {
+    id: string
+    name: string
+    flags: number
+    lifecycle: number
+    state: string[]
+    listed: boolean
+    animated: boolean
+    owner?: Owner
+    host: Host
+    tags?: string[]
+}
+
+export interface Owner {
+    id: string
+    username: string
+    display_name: string
+    avatar_url?: string
+    style: Style
+    role_ids: string[]
+    connections: Connection[]
+}
+
+export interface Style {
+    color?: number
+    paint_id?: string
+    badge_id?: string
+}
+
+
+
+export interface Connection {
+    id: string
+    platform: string
+    username: string
+    display_name: string
+    linked_at: number
+    emote_capacity: number
+    emote_set_id: string
+    emote_set: any
+}
+
+export interface Host {
+    url: string
+    files: File[]
+}
+
+export interface File {
+    name: string
+    static_name: string
+    width: number
+    height: number
+    frame_count: number
+    size: number
+    format: string
+}
+
+export interface User {
+    id: string
+    username: string
+    display_name: string
+    created_at: number
+    avatar_url: string
+    style: Style
+    emote_sets: EmoteSet[]
+    editors: Editor[]
+    roles: string[]
+    connections: Connection[]
+}
+
+export interface Editor {
+    id: string
+    permissions: number
+    visible: boolean
+    added_at: number
+}
+
+
+
+interface Opts {
+    channelId?: number
+    only?: Array<string>
+    usePixelDensity?: boolean
+    colon?: boolean
+    height?: string
+    format?: string
+    cache?: string
+    proxy?: string
+}
+
+export class EmotesJS {
+    #cachedEmotes = new Map<string, string>();
     #colon = true;
-    /** @default "1.65rem" */
     #height = "1.65rem";
-    /** @default "WEBP" */
     #format = "WEBP";
-    /** @default "https://cdn.7tv.app" */
     #allowedOrigins = "https://cdn.7tv.app";
-    /** @default false */
     #isReady = false;
-    /** @default false */
     #usePixelDensity = false;
-    /** @default 0 */
     total = 0;
-    /** @default 0 */
     channelId = 0;
-    /** @default Promise<void> */
     isLoading = Promise.resolve();
-    /** @default "" */
     proxy = ""
 
-    /**
-     * @static
-     */
-    static instance;
-    /**
-     * @param {Opts} opts
-     */
-    constructor(opts) {
+    static instance: EmotesJS;
+
+    constructor(opts: Opts) {
         if (EmotesJS.instance && EmotesJS.instance.channelId !== 0) {
             return EmotesJS.instance;
         }
@@ -47,37 +156,28 @@ class EmotesJS {
                 this.#isReady = true;
             }
 
-            this.proxy = opts.proxy
+            this.proxy = opts.proxy || ""
         }
         this.isLoading = this.load(only);
         EmotesJS.instance = this;
     }
-    /**
-     * @static
-     * @param {string} cache
-     * @returns {EmotesJS}
-     */
-    static fromCache(cache) {
+
+    static fromCache(cache: string) {
         return new EmotesJS({ cache });
     }
-    /**
-     * @returns {string}
-     */
+
     cache() {
         return JSON.stringify(Object.fromEntries(this.#cachedEmotes.entries()));
     }
-    /**
-     * @param {string[]} [only=[]]
-     * @returns {Promise<void>}
-     */
-    async load(only = []) {
-        let globalProm = fetch("https://7tv.io/v3/emote-sets/global").then(r => {
+
+    async load(only: Array<string> = []) {
+        let globalProm: Promise<EmoteSet> = fetch("https://7tv.io/v3/emote-sets/global").then(r => {
             if (r.ok) {
                 return r.json();
             }
             throw new Error("fetch unsuccessful");
         });
-        let chProm = fetch("https://7tv.io/v3/users/twitch/" + this.channelId).then(r => {
+        let chProm: Promise<SevenTVChannelEmotes> = fetch("https://7tv.io/v3/users/twitch/" + this.channelId).then(r => {
             if (r.ok) {
                 return r.json();
             }
@@ -110,7 +210,8 @@ class EmotesJS {
             let srcset = files.reduce((acc, curr) => {
                 let w = `${curr.width}w`;
                 if (this.#usePixelDensity) {
-                    [w] = curr.name.split('.');
+                    //@ts-ignore
+                    [w] = curr.name.split('.') || '';
                 }
                 return `${url}/${curr.name} ${w}, ${acc}`;
             }, "");
@@ -120,11 +221,8 @@ class EmotesJS {
         this.total = this.#cachedEmotes.size;
         this.#isReady = true;
     }
-    /**
-     * @param {string | undefined} text
-     * @returns {string}
-     */
-    parse(text) {
+
+    parse(text: string) {
         if (!text) {
             console.log("no text to parse emotes");
             return "";
@@ -141,11 +239,11 @@ class EmotesJS {
         let fullText = "";
         for (let i = 0; i < words.length; i++) {
             let word = words[i];
-            if (this.#colon && !word.startsWith(":")) {
+            if (this.#colon && !word?.startsWith(":")) {
                 fullText += word + " ";
                 continue;
             }
-            let wordKey = word.replaceAll(":", "");
+            let wordKey = word?.replaceAll(":", "") || '';
             let emote = this.#cachedEmotes.get(wordKey);
             if (emote) {
                 fullText += emote + " ";
@@ -156,14 +254,4 @@ class EmotesJS {
         return fullText.trim();
     }
 }
-module.exports = { EmotesJS };
-/**
- * @typedef {Object} Opts
- * @property {number} [channelId]
- * @property {string[]} [only]
- * @property {boolean} [colon]
- * @property {string} [height]
- * @property {"WEBP" | "AVIF"} [format]
- * @property {boolean} [usePixelDensity]
- * @property {string} [cache]
- */
+

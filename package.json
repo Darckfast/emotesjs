@@ -10,9 +10,19 @@
         "node": ">=22"
     },
     "files": [
-        "index.js"
+        "dist"
     ],
-    "main": "index.js",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            }
+        }
+    },
     "repository": {
         "type": "git",
         "url": "git://github.com/darckfast/emotesjs.git"
@@ -25,9 +35,11 @@
     ],
     "scripts": {
         "test": "vitest run",
-        "prepublishOnly": "pnpx terser index.js -o index.js"
+        "prepublishOnly": "pnpx tsup && pnpx terser ./dist/index.js -o ./dist/index.js"
     },
     "devDependencies": {
+        "tsup": "^8.5.1",
+        "typescript": "^6.0.3",
         "vitest": "^3.2.4"
     }
 }
