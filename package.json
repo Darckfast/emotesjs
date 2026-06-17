@@ -31,7 +31,17 @@
         "twitch",
         "7tv",
         "emotes",
-        "responsive"
+        "responsive",
+        "chat",
+        "chat-overlay",
+        "inline-emotes",
+        "zero-dependencies",
+        "emote-parser",
+        "srcset",
+        "stream",
+        "streaming",
+        "typescript",
+        "esm"
     ],
     "scripts": {
         "test": "vitest run",
