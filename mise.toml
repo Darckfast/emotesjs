@@ -13,3 +13,6 @@ run = "pnpx tsup && pnpx terser ./dist/index.js -o ./dist/index.js"
 depends = ["prepare"]
 run = "pnpm run test"
 
+[tasks.publish]
+depends = ["prepare"]
+run = "pnpm publish --access public --no-git-checks"
