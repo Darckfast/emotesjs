@@ -2,7 +2,7 @@ import { beforeAll, describe, expect, test } from 'vitest'
 import { EmotesJS } from './index'
 
 describe('EmotesJS: parse', () => {
-    let emotes
+    let emotes: EmotesJS
 
     beforeAll(async () => {
         emotes = new EmotesJS({ channelId: 38746172, colon: true })
