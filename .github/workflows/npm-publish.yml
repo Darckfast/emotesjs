@@ -9,9 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
+      content: read
     steps:
       - uses: actions/checkout@v6
       - uses: jdx/mise-action@v4
       - run: mise publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
