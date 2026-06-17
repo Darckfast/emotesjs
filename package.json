@@ -35,7 +35,7 @@
     ],
     "scripts": {
         "test": "vitest run",
-        "prepublishOnly": "pnpx tsup && pnpx terser ./dist/index.js -o ./dist/index.js"
+        "prepublishOnly": "npx tsup && npx terser ./dist/index.js -o ./dist/index.js"
     },
     "devDependencies": {
         "tsup": "^8.5.1",
