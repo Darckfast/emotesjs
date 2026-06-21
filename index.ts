@@ -1,4 +1,4 @@
-export interface SevenTVChannelEmotes {
+interface SevenTVChannelEmotes {
     id: string
     platform: string
     username: string
@@ -10,7 +10,7 @@ export interface SevenTVChannelEmotes {
     user: User
 }
 
-export interface EmoteSet {
+interface EmoteSet {
     id: string
     name: string
     flags: number
@@ -23,7 +23,7 @@ export interface EmoteSet {
     owner: any
 }
 
-export interface Emote {
+interface Emote {
     id: string
     name: string
     flags: number
@@ -33,7 +33,7 @@ export interface Emote {
     origin_id: any
 }
 
-export interface Data {
+interface Data {
     id: string
     name: string
     flags: number
@@ -46,7 +46,7 @@ export interface Data {
     tags?: string[]
 }
 
-export interface Owner {
+interface Owner {
     id: string
     username: string
     display_name: string
@@ -56,15 +56,13 @@ export interface Owner {
     connections: Connection[]
 }
 
-export interface Style {
+interface Style {
     color?: number
     paint_id?: string
     badge_id?: string
 }
 
-
-
-export interface Connection {
+interface Connection {
     id: string
     platform: string
     username: string
@@ -75,12 +73,12 @@ export interface Connection {
     emote_set: any
 }
 
-export interface Host {
+interface Host {
     url: string
     files: File[]
 }
 
-export interface File {
+interface File {
     name: string
     static_name: string
     width: number
@@ -90,7 +88,7 @@ export interface File {
     format: string
 }
 
-export interface User {
+interface User {
     id: string
     username: string
     display_name: string
@@ -103,14 +101,12 @@ export interface User {
     connections: Connection[]
 }
 
-export interface Editor {
+interface Editor {
     id: string
     permissions: number
     visible: boolean
     added_at: number
 }
-
-
 
 interface Opts {
     channelId?: number
@@ -158,7 +154,11 @@ export class EmotesJS {
 
             this.proxy = opts.proxy || ""
         }
-        this.isLoading = this.load(only);
+
+        if (!this.#isReady) {
+            this.isLoading = this.load(only);
+        }
+
         EmotesJS.instance = this;
     }
 
